@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "5001:5001"
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/user-api
+      - JWT_SECRET=0716c8034a7607ccb4600fa3716681687b5795f16d94ab779e0140af5cb689d2913fc74abd254659a500953eafc41ddd015efe91cecb58fb31f2b6efa601c209
+      - PORT=5001
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
+
